@@ -64,8 +64,8 @@ MONGO_URI=mongodb://localhost:27017/plantguide
 # JWT Configuration
 JWT_SECRET=guiaplantas_super_secret_123
 JWT_EXPIRES_IN=7d
-🧰 Requisitos previos (NUEVA MÁQUINA)
-1️⃣ Instalar Node.js
+## 🧰 Requisitos previos (NUEVA MÁQUINA)
+##1️⃣ Instalar Node.js
 Descargar versión LTS:
 https://nodejs.org
 
@@ -73,7 +73,7 @@ Verificar:
 
 node -v
 npm -v
-2️⃣ Instalar SQL Server Express (Windows)
+##2️⃣ Instalar SQL Server Express (Windows)
 Descargar:
 https://www.microsoft.com/sql-server/sql-server-downloads
 
@@ -86,10 +86,10 @@ Instalación Basic o Custom
 La instancia por defecto será algo como:
 
 DESKTOP\SQLEXPRESS
-3️⃣ Instalar SQL Server Management Studio (SSMS)
+##3️⃣ Instalar SQL Server Management Studio (SSMS)
 https://learn.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms
 
-4️⃣ Instalar MongoDB
+##4️⃣ Instalar MongoDB
 MongoDB Community Server
 https://www.mongodb.com/try/download/community
 
@@ -98,7 +98,7 @@ MongoDB Compass (opcional)
 Verificar:
 
 mongod
-🗄️ Configuración COMPLETA de SQL Server
+##🗄️ Configuración COMPLETA de SQL Server
 🔹 1. Conectarse al servidor
 Abrir SSMS y conectarse usando:
 
@@ -156,7 +156,7 @@ Connections
 Activar:
 
 Allow remote connections to this server
-🧱 Creación de tablas (ejemplo base)
+##🧱 Creación de tablas (ejemplo base)
 USE guia_plantas;
 GO
 
@@ -172,7 +172,7 @@ CREATE TABLE plantas (
 GO
 (Las demás tablas se crean automáticamente o según los modelos del proyecto)
 
-🌱 Insertar datos iniciales (SEED)
+##🌱 Insertar datos iniciales (SEED)
 El proyecto incluye un archivo de seed:
 
 src/seeds/seedPlants.js
@@ -189,7 +189,7 @@ Luego:
 npm run seed
 Esto insertará las plantas iniciales en la base de datos SQL Server.
 
-🍃 Configuración de MongoDB
+##🍃 Configuración de MongoDB
 ▶️ Iniciar MongoDB
 mongod
 ▶️ Base usada
@@ -217,7 +217,7 @@ rutas protegidas
 
 control de roles
 
-▶️ Ejecutar el proyecto
+##▶️ Ejecutar el proyecto
 Instalar dependencias
 npm install
 Ejecutar servidor
