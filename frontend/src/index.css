@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/* DaisyUI plugin */
+@plugin "daisyui" {
+  themes: plantguide --default;
+}
+
+/* Tema personalizado "plantguide" */
+@plugin "daisyui/theme" {
+  name: "plantguide";
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: #ffffff;
+  --color-base-200: #f5f5f5;
+  --color-base-300: #e0e0e0;
+  --color-base-content: #1f2937;
+
+  --color-primary: #10b981;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #059669;
+  --color-secondary-content: #ffffff;
+
+  --color-accent: #34d399;
+  --color-accent-content: #064e3b;
+
+  --color-neutral: #1f2937;
+  --color-neutral-content: #ffffff;
+
+  --color-info: #3abff8;
+  --color-info-content: #ffffff;
+
+  --color-success: #36d399;
+  --color-success-content: #064e3b;
+
+  --color-warning: #fbbd23;
+  --color-warning-content: #78350f;
+
+  --color-error: #f87272;
+  --color-error-content: #ffffff;
+}
+
+/* Fuente global */
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilos personalizados */
+.plant-card-hover {
+  transition: all 0.3s ease;
+}
+
+.plant-card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.1), 0 10px 10px -5px rgba(16, 185, 129, 0.04);
+}
+
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.loading-pulse {
+  animation: pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.gradient-green {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.gradient-green-light {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+}

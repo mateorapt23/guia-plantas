@@ -1,0 +1,42 @@
+USE guia_plantas;
+GO
+
+-- Tabla de Usuarios
+CREATE TABLE Users (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    name NVARCHAR(100) NOT NULL,
+    email NVARCHAR(255) NOT NULL UNIQUE,
+    passwordHash NVARCHAR(255) NOT NULL,
+    role NVARCHAR(20) DEFAULT 'USER' CHECK (role IN ('USER', 'ADMIN')),
+    surveyCompleted BIT DEFAULT 0,
+    isActive BIT DEFAULT 1,
+    createdAt DATETIME DEFAULT GETDATE(),
+    updatedAt DATETIME DEFAULT GETDATE()
+);
+GO
+
+-- Tabla de Encuestas (respuestas del formulario inicial)
+CREATE TABLE Surveys (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    userId INT NOT NULL,
+    experience NVARCHAR(50) NOT NULL, -- 'beginner', 'intermediate', 'expert'
+    sunlight NVARCHAR(50) NOT NULL, -- 'low', 'medium', 'high'
+    space NVARCHAR(50) NOT NULL, -- 'small', 'medium', 'large'
+    petFriendly BIT DEFAULT 0,
+    maintenanceLevel NVARCHAR(50) NOT NULL, -- 'low', 'medium', 'high'
+    climate NVARCHAR(50), -- 'tropical', 'temperate', 'dry', etc.
+    purpose NVARCHAR(100), -- 'decoration', 'air-purification', 'food', etc.
+    createdAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (userId) REFERENCES Users(id) ON DELETE CASCADE
+);
+GO
+
+-- Índices para mejorar rendimiento
+CREATE INDEX idx_users_email ON Users(email);
+CREATE INDEX idx_users_role ON Users(role);
+CREATE INDEX idx_surveys_userId ON Surveys(userId);
+GO
+
+-- Verificar que las tablas se crearon
+SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';
+GO
