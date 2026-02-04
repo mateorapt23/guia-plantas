@@ -48,8 +48,7 @@ const Footer = () => {
 
         {/* Línea inferior */}
         <div className="border-t border-emerald-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-2">
-          <p className="text-emerald-500 text-xs">© 2025 Plant Guide. Todos los derechos reservados.</p>
-          <p className="text-emerald-500 text-xs">Hecho con 💚 para los amantes de las plantas</p>
+          <p className="text-emerald-500 text-xs">© 2026 Plant Guide. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
