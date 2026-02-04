@@ -29,11 +29,21 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Solo redirigir a login si:
+    // 1. El error es 401 (no autorizado)
+    // 2. NO estamos en las rutas de auth (login/register)
+    // 3. El usuario tiene un token guardado (significa que la sesión expiró)
     if (error.response?.status === 401) {
-      // Token expirado o inválido
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
+      const currentPath = window.location.pathname;
+      const isAuthRoute = currentPath === '/login' || currentPath === '/register';
+      const hasToken = localStorage.getItem('token');
+      
+      // Solo redirigir si NO estamos en login/register Y tenemos un token (sesión expirada)
+      if (!isAuthRoute && hasToken) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }

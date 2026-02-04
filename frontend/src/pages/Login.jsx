@@ -17,23 +17,31 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
+    
     setLoading(true);
     setError('');
 
-    const result = await login(formData.email, formData.password);
+    try {
+      const result = await login(formData.email, formData.password);
 
-    if (result.success) {
-      const savedUser = JSON.parse(localStorage.getItem('user'));
-      if (savedUser?.surveyCompleted) {
-        navigate('/dashboard'); // ← ESTO
+      if (result.success) {
+        const savedUser = JSON.parse(localStorage.getItem('user'));
+        if (savedUser?.surveyCompleted) {
+          navigate('/dashboard');
+        } else {
+          navigate('/survey');
+        }
       } else {
-        navigate('/survey');
+        // Mantener los datos en el formulario y mostrar el error
+        setError(result.error || 'Credenciales inválidas');
+        setLoading(false);
       }
-    } else {
-      setError(result.error);
+    } catch (err) {
+      console.error('Error en login:', err);
+      setError('Error al iniciar sesión. Intenta nuevamente.');
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
