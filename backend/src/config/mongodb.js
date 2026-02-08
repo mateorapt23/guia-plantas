@@ -2,7 +2,8 @@
 const mongoose = require('mongoose');
 
 // Carga las variables de entorno desde el archivo .env
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 // Función principal encargada de conectar la aplicación con MongoDB
 const connectMongoDB = async () => {

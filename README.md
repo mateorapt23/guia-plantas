@@ -1,4 +1,4 @@
-# 🌱 Plant Guide - Guía de Plantas para el Hogar
+# 🌱 SuggestiPlant - Guía de Plantas para el Hogar
 
 > Plataforma web interactiva que ayuda a las personas a elegir, cuidar y gestionar sus plantas ideales según su hogar y estilo de vida.
 
