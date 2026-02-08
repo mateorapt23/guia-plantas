@@ -56,7 +56,7 @@ const Landing = () => {
   ];
 
   const testimonials = [
-    { name: 'María G.', text: 'Gracias a Plant Guide encontré la planta perfecta para mi departamento sin ventanas. ¡Mi Pothos está hermoso!', stars: 5 },
+    { name: 'María G.', text: 'Gracias a SuggestiPlant encontré la planta perfecta para mi departamento sin ventanas. ¡Mi Pothos está hermoso!', stars: 5 },
     { name: 'Carlos M.', text: 'La encuesta es muy intuitiva y las recomendaciones fueron exactas. Ahora tengo 4 plantas y todas sanas.', stars: 5 },
     { name: 'Laura P.', text: 'Es como tener un experto de jardinería en el bolsillo. Las guías de cuidado son muy claras.', stars: 5 },
   ];

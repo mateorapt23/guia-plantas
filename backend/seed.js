@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 const connectMongoDB = require('./src/config/mongodb');
 const seedPlants = require('./src/utils/seedPlants');
 

@@ -24,7 +24,7 @@ const Navbar = () => {
               <Leaf className="text-white" size={18} />
             </div>
             <span className="text-xl font-bold text-white group-hover:text-emerald-200 transition-colors">
-              Plant Guide
+              SuggestiPlant
             </span>
           </Link>
 

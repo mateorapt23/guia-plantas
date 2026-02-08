@@ -1,4 +1,4 @@
-import { Mail, MapPin, Leaf } from 'lucide-react';
+import { Leaf } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -13,7 +13,7 @@ const Footer = () => {
               <div className="w-9 h-9 bg-gradient-green rounded-xl flex items-center justify-center">
                 <Leaf className="text-white" size={18} />
               </div>
-              <span className="text-xl font-bold text-white">Plant Guide</span>
+              <span className="text-xl font-bold text-white">SuggestiPlant</span>
             </div>
             <p className="text-emerald-300 text-sm leading-relaxed max-w-sm">
               Tu guía inteligente de plantas para el hogar. Descubre, aprende y crea tu jardín interior perfecto, sin importar tu nivel de experiencia.
@@ -29,26 +29,11 @@ const Footer = () => {
               <li><Link to="/login" className="text-emerald-300 hover:text-white text-sm transition-colors">Iniciar Sesión</Link></li>
             </ul>
           </div>
-
-          {/* Contacto */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Contacto</h4>
-            <ul className="flex flex-col gap-3">
-              <li className="flex items-start gap-2">
-                <Mail className="text-emerald-400 mt-0.5 shrink-0" size={16} />
-                <span className="text-emerald-300 text-sm">contacto@plantguide.com</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="text-emerald-400 mt-0.5 shrink-0" size={16} />
-                <span className="text-emerald-300 text-sm">Quito, Ecuador</span>
-              </li>
-            </ul>
-          </div>
         </div>
 
         {/* Línea inferior */}
         <div className="border-t border-emerald-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-2">
-          <p className="text-emerald-500 text-xs">© 2026 Plant Guide. Todos los derechos reservados.</p>
+          <p className="text-emerald-500 text-xs">© 2026 SuggestiPlant. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

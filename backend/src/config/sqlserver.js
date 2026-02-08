@@ -2,7 +2,8 @@
 const sql = require('mssql');
 
 // Cargamos las variables de entorno desde el archivo .env
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 // Definimos la configuración de conexión a SQL Server usando nuestras variables de entorno
 const config = {

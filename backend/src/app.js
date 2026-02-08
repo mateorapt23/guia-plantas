@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // Ruta de prueba
 app.get('/', (req, res) => {
   res.json({ 
-    message: '🌱 Plant Guide API',
+    message: '🌱 SuggestiPlant API',
     version: '1.0.0',
     status: 'running'
   });
