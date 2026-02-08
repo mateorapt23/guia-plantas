@@ -1,0 +1,8 @@
+{
+  "name": "guia-plantas",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\""
+  }
+}
