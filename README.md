@@ -50,6 +50,44 @@
 - 🔧 **Panel de administración** completo
 
 ---
+## 👥 Roles y Permisos
+
+El sistema maneja control de acceso basado en roles:
+
+### Usuario
+- Registrarse e iniciar sesión
+- Completar encuesta de preferencias
+- Recibir recomendaciones personalizadas
+- Visualizar catálogo de plantas
+- Guardar y gestionar plantas favoritas
+
+### Administrador
+- Gestionar usuarios (roles, estado)
+- Crear, editar y eliminar plantas
+- Administrar reglas de recomendación
+- Acceder al panel administrativo
+
+### Sistema
+- Validar credenciales
+- Procesar encuestas
+- Generar recomendaciones automáticas
+- Controlar permisos de acceso
+
+---
+
+## 📌 Casos de Uso Principales
+
+- CU01: Registro de usuario
+- CU02: Inicio de sesión
+- CU03: Completar encuesta de preferencias
+- CU04: Recibir recomendaciones de plantas
+- CU05: Ver catálogo de plantas
+- CU06: Guardar plantas favoritas
+- CU07: Gestión de plantas (Administrador)
+- CU08: Gestión de usuarios (Administrador)
+
+
+---
 
 ## 🛠️ Tecnologías
 
@@ -102,6 +140,37 @@
 **Separación de datos:**
 - **SQL Server**: Usuarios, Autenticación, Encuestas (datos estructurados y críticos)
 - **MongoDB**: Plantas, Favoritos, Recomendaciones (datos flexibles y documentos)
+
+---
+
+## 📐 Diagramas UML
+
+El proyecto cuenta con los siguientes diagramas:
+- Diagrama de Casos de Uso
+- Diagrama de Arquitectura
+- Diagrama Entidad–Relación
+- Diagrama de Componentes
+
+Estos diagramas forman parte de la documentación técnica del sistema.
+
+
+---
+
+## 🚧 Estado del Proyecto
+
+El proyecto se encuentra en desarrollo activo.
+
+### Funcionalidades implementadas
+- Autenticación y control de roles
+- Encuesta de preferencias
+- Recomendaciones inteligentes
+- Catálogo de plantas
+- Panel administrativo
+
+### Funcionalidades en mejora
+- Optimización del motor de recomendaciones
+- Mejoras de experiencia de usuario
+
 
 ---
 
