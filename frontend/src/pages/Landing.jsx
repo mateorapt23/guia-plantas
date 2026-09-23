@@ -1,9 +1,47 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { plantsAPI } from '../services/api';
 import { Leaf, ArrowRight, Check, Star, Droplets, Sun, Heart, UserPlus, FileText, Sparkles } from 'lucide-react';
+
+// Nombres exactos (como están guardados en la base) de las 4 plantas que
+// queremos destacar en la landing. El orden de esta lista es el orden en
+// que se muestran.
+const FEATURED_PLANT_NAMES = ['Pothos', 'Sansevieria', 'Monstera Deliciosa', 'Aloe Vera'];
+
+const DIFFICULTY_LABEL = {
+  beginner: 'Fácil de cuidar',
+  intermediate: 'Dificultad media',
+  expert: 'Para expertos',
+};
 
 const Landing = () => {
   const { isAuthenticated } = useAuth();
+  const [featuredPlants, setFeaturedPlants] = useState([]);
+  const [loadingPlants, setLoadingPlants] = useState(true);
+
+  useEffect(() => {
+    const loadFeaturedPlants = async () => {
+      try {
+        const response = await plantsAPI.getAll({ limit: 100 });
+        const allPlants = response.data.plants || [];
+
+        const selected = FEATURED_PLANT_NAMES
+          .map((name) =>
+            allPlants.find((p) => p.name.toLowerCase() === name.toLowerCase())
+          )
+          .filter(Boolean);
+
+        setFeaturedPlants(selected);
+      } catch (err) {
+        console.error('Error cargando plantas destacadas:', err);
+      } finally {
+        setLoadingPlants(false);
+      }
+    };
+
+    loadFeaturedPlants();
+  }, []);
 
   const features = [
     {
@@ -29,29 +67,6 @@ const Landing = () => {
       title: 'Guarda tus Favoritas',
       description: 'Crea tu lista de plantas favoritas y agrega notas personales para recordar cómo cuidarlas.',
       bg: 'bg-rose-50',
-    },
-  ];
-
-  const plants = [
-    { 
-      name: 'Pothos', 
-      trait: 'Muy resistente',
-      image: 'https://apps.rhs.org.uk/plantselectorimages/detail/Web_Use-_KOS3827_704.jpg'
-    },
-    { 
-      name: 'Sansevieria', 
-      trait: 'Poco riego',
-      image: 'https://36580daefdd0e4c6740b-4fe617358557d0f7b1aac6516479e176.ssl.cf1.rackcdn.com/products/18871.14455.jpg'
-    },
-    { 
-      name: 'Monstera', 
-      trait: 'Hojas exóticas',
-      image: 'https://www.ourhouseplants.com/imgs-content/monstera-deliciosa-moss-pole.jpg'
-    },
-    { 
-      name: 'Aloe Vera', 
-      trait: 'Medicinal',
-      image: 'https://cdn.shopify.com/s/files/1/1740/1449/files/aloe_vera_325x325.jpg?v=1675979009'
     },
   ];
 
@@ -155,23 +170,37 @@ const Landing = () => {
             <p className="text-gray-500 mt-3 max-w-xl mx-auto">Algunas de las especies más amadas por nuestros usuarios</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {plants.map((plant, i) => (
-              <div key={i} className="card bg-white shadow-md hover:shadow-xl plant-card-hover border border-gray-100 overflow-hidden">
-                <figure className="h-48 overflow-hidden">
-                  <img 
-                    src={plant.image} 
-                    alt={plant.name}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                </figure>
-                <div className="card-body items-center text-center p-6">
-                  <h3 className="card-title text-gray-800 text-lg">{plant.name}</h3>
-                  <p className="text-emerald-600 text-sm font-medium">{plant.trait}</p>
+          {loadingPlants ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="h-72 rounded-xl bg-gray-100 animate-pulse" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {featuredPlants.map((plant) => (
+                <div key={plant._id} className="card bg-white shadow-md hover:shadow-xl plant-card-hover border border-gray-100 overflow-hidden">
+                  <figure className="h-48 overflow-hidden">
+                    <img
+                      src={plant.imageUrl}
+                      alt={plant.name}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.parentElement.innerHTML = '<span class="text-6xl flex items-center justify-center h-full">🌿</span>';
+                      }}
+                    />
+                  </figure>
+                  <div className="card-body items-center text-center p-6">
+                    <h3 className="card-title text-gray-800 text-lg">{plant.name}</h3>
+                    <p className="text-emerald-600 text-sm font-medium">
+                      {DIFFICULTY_LABEL[plant.care?.difficulty] || plant.care?.difficulty}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           <div className="text-center mt-10">
             <Link to="/plants" className="btn btn-outline border-emerald-300 text-emerald-700 font-semibold hover:bg-emerald-50 rounded-xl px-6 inline-flex items-center gap-2">
