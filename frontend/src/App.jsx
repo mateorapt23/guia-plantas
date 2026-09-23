@@ -171,7 +171,7 @@ const AppContent = () => {
 };
 
 // Componente raíz de la aplicación
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       {/* Proveedor de autenticación que envuelve toda la app */}
