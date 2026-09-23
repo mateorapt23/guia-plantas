@@ -1,19 +1,21 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+
 const app = require('./src/app');
-const { connectSQL, closeSQL } = require('./src/config/sqlserver');
+const pool = require('./src/config/db');
 const connectMongoDB = require('./src/config/mongodb');
 
 const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
-    // Conectar a SQL Server
-    await connectSQL();
-    
+    // Verifica la conexión a PostgreSQL antes de arrancar
+    await pool.query('SELECT 1');
+    console.log('✅ Conectado a PostgreSQL');
+
     // Conectar a MongoDB
     await connectMongoDB();
-    
+
     // Iniciar servidor
     app.listen(PORT, () => {
       console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
@@ -25,16 +27,15 @@ const startServer = async () => {
   }
 };
 
-// Manejo de cierre graceful
 process.on('SIGTERM', async () => {
-  console.log('⚠️ SIGTERM recibido, cerrando servidor...');
-  await closeSQL();
+  console.log('⚠️  SIGTERM recibido, cerrando servidor...');
+  await pool.end();
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
-  console.log('⚠️ SIGINT recibido, cerrando servidor...');
-  await closeSQL();
+  console.log('⚠️  SIGINT recibido, cerrando servidor...');
+  await pool.end();
   process.exit(0);
 });
 
